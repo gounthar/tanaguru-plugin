@@ -30,9 +30,8 @@ Features :
 
 ## Other Open Source tools
 
-* [KBAccess](http://www.kbaccess.org/) : database of good and bad examples of web accessibility
 * [Tanaguru Contrast-Finder](http://contrast-finder.tanaguru.com/) : for a given wrong contrast, *propose* good color combination
-* [Accessibility observatory](http://observatoire-accessibilite.org/) : have an overview of the accessibility of a large set of websites
+
  
 All these projects are opensource and also under the umbrella of [Tanaguru Github account](https://github.com/Tanaguru)
 
