@@ -15,6 +15,15 @@
     <packaging>hpi</packaging>
     <name>Tanaguru Plugin</name>
     <description>Digital accessibility tests can be added to a continuous integration platform by launching Tanaguru Engine tests, using Tanaguru Jenkins. Tanaguru Jenkins is a Jenkins plugin allowing to pilot Tanaguru Engine via its REST API(using JSON format). It allows Jenkins to integrate Tanaguru Engine's digital accessibility tests in its tests workflow.</description>
+    <url>https://wiki.jenkins.io/display/JENKINS/Tanaguru+plugin</url>
+
+    <developers>
+        <developer>
+            <id>tanaguru</id>
+            <name>Tanaguru Support</name>
+            <email>support@tanaguru.com</email>
+        </developer>
+    </developers>
 
     <properties>
         <!-- Baseline Jenkins version you use to build the plugin. Users must have this version or newer to run. -->
