@@ -13,7 +13,7 @@
     <f:entry title="Name" field="name">
         <f:textbox />
     </f:entry>
-      <f:entry title="Url to audit" field="urlToAudit">
+    <f:entry title="Url to audit" field="urlToAudit">
         <f:textbox />
     </f:entry>
   
@@ -21,7 +21,7 @@
         <f:textarea />
     </f:entry>
     
-      <f:entry title="${%app.rest.uri.title}" field="urlTanaguruWebService"  description="${%app.rest.uri.description}">
+    <f:entry title="${%app.rest.uri.title}" field="urlTanaguruWebService"  description="${%app.rest.uri.description}">
         <f:textbox />
     </f:entry>
   
@@ -34,6 +34,19 @@
   
     <f:section title="Advanced Tanguru Plugin Integration Options">
         <f:advanced>
+
+            <f:entry title="Hote proxy" field="proxy_uri">
+                    <f:textbox />
+            </f:entry>
+
+            <f:entry title="Utilisateur proxy" field="proxy_username">
+                    <f:textbox />
+            </f:entry>
+
+            <f:entry title="Mot de passe proxy" field="proxy_password">
+                    <f:password />
+            </f:entry>
+
 
             <f:entry field="thresholdMetric" title="${%appdynamics.threshold.metric.title}"
                      description="${%appdynamics.threshold.metric.description}">

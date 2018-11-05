@@ -9,6 +9,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.google.gson.Gson;
+import org.glassfish.jersey.client.ClientProperties;
 import org.tanaguru.model.AuditModel;
 import org.tanaguru.util.UtilityCall;
 
@@ -22,11 +23,18 @@ public class RestWebServiceClient {
     private Client client = null;
     private WebTarget target = null;
 
-    public RestWebServiceClient(String baseUri) {
+    public RestWebServiceClient(String baseUri, String proxy_uri, String proxy_username, String proxy_password) {
         this.baseUri = baseUri;
         client = ClientBuilder.newClient();
 //        client.property(ClientProperties.CONNECT_TIMEOUT, 1000);
 //        client.property(ClientProperties.READ_TIMEOUT, 1000);
+
+        if(!proxy_uri.isEmpty() && ! proxy_username.isEmpty() && !proxy_password.isEmpty()){
+            client.property(ClientProperties.PROXY_URI, proxy_uri);
+            client.property(ClientProperties.PROXY_USERNAME, proxy_username);
+            client.property(ClientProperties.PROXY_PASSWORD, proxy_password);
+        }
+
         target = client.target(baseUri);
     }
 

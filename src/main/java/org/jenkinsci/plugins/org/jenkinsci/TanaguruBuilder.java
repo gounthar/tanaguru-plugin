@@ -45,15 +45,31 @@ public class TanaguruBuilder extends Builder implements SimpleBuildStep {
     private final int performanceUnstableMark;
     private final int performanceFailedMark;
 
+    private String proxy_uri = "";
+    private String proxy_username = "";
+    private String proxy_password = "";
+
     // Fields in config.jelly must match the parameter names in the "DataBoundConstructor"
     @DataBoundConstructor
-    public TanaguruBuilder(String name, String scenario, String urlToAudit, String urlTanaguruWebService, int performanceUnstableMark, int performanceFailedMark) {
+    public TanaguruBuilder(String name,
+                           String scenario,
+                           String urlToAudit,
+                           String urlTanaguruWebService,
+                           int performanceUnstableMark,
+                           int performanceFailedMark,
+                           String proxy_uri,
+                           String proxy_username,
+                           String proxy_password) {
         this.name = name;
         this.scenario = scenario;
         this.urlTanaguruWebService = urlTanaguruWebService;
         this.performanceUnstableMark = performanceUnstableMark;
         this.performanceFailedMark = performanceFailedMark;
         this.urlToAudit = urlToAudit;
+
+        this.proxy_uri = proxy_uri;
+        this.proxy_username = proxy_username;
+        this.proxy_password = proxy_password;
     }
 
     /**
@@ -102,7 +118,7 @@ public class TanaguruBuilder extends Builder implements SimpleBuildStep {
         }
 
         listener.getLogger().println("Call Tanaguru Rest web service .....");
-        RestWebServiceClient restWebServiceClient = new RestWebServiceClient(urlTanaguruWebService);
+        RestWebServiceClient restWebServiceClient = new RestWebServiceClient(urlTanaguruWebService, proxy_uri, proxy_username, proxy_password);
         listener.getLogger().println("Tanaguru Rest web service test: " + restWebServiceClient.getTestConnection());
 
         Double mark = -1.0;
