@@ -24,30 +24,28 @@
     <f:entry title="${%app.rest.uri.title}" field="urlTanaguruWebService"  description="${%app.rest.uri.description}">
         <f:textbox />
     </f:entry>
+
+    <f:entry title="${%app.rest.proxy.uri}" field="proxy_uri">
+            <f:textbox />
+    </f:entry>
+
+    <f:entry title="${%app.rest.proxy.username}" field="proxy_username">
+            <f:textbox />
+    </f:entry>
+
+    <f:entry title="${%app.rest.proxy.password}" field="proxy_password">
+            <f:password />
+    </f:entry>
   
     <f:validateButton
         title="${%rest.connection.test.title}" progress="${%rest.connection.test.progress}"
-        method="testTanaguruRestConnection" with="urlTanaguruWebService"/>
+        method="testTanaguruRestConnection" with="urlTanaguruWebService,proxy_uri,proxy_username,proxy_password"/>
   
   
   
   
     <f:section title="Advanced Tanguru Plugin Integration Options">
         <f:advanced>
-
-            <f:entry title="Hote proxy" field="proxy_uri">
-                    <f:textbox />
-            </f:entry>
-
-            <f:entry title="Utilisateur proxy" field="proxy_username">
-                    <f:textbox />
-            </f:entry>
-
-            <f:entry title="Mot de passe proxy" field="proxy_password">
-                    <f:password />
-            </f:entry>
-
-
             <f:entry field="thresholdMetric" title="${%appdynamics.threshold.metric.title}"
                      description="${%appdynamics.threshold.metric.description}">
                 <f:select/>

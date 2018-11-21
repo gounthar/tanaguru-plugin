@@ -235,9 +235,12 @@ public class TanaguruBuilder extends Builder implements SimpleBuildStep {
         }
 
         //validate form
-        public FormValidation doTestTanaguruRestConnection(@QueryParameter final String urlTanaguruWebService) {
+        public FormValidation doTestTanaguruRestConnection(@QueryParameter final String urlTanaguruWebService,
+                                                            @QueryParameter final String proxy_uri,
+                                                            @QueryParameter final String proxy_username,
+                                                            @QueryParameter final String proxy_password) {
             FormValidation validationResult;
-            RestWebServiceClient restWebServiceClient = new RestWebServiceClient(urlTanaguruWebService);
+            RestWebServiceClient restWebServiceClient = new RestWebServiceClient(urlTanaguruWebService, proxy_uri, proxy_username, proxy_password);
 
             if (restWebServiceClient.getTestConnection().equalsIgnoreCase("it works")) {
                 validationResult = FormValidation.ok("Connection Ok!");

@@ -9,6 +9,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.google.gson.Gson;
+import org.glassfish.jersey.client.ClientConfig;
 import org.glassfish.jersey.client.ClientProperties;
 import org.tanaguru.model.AuditModel;
 import org.tanaguru.util.UtilityCall;
@@ -25,16 +26,17 @@ public class RestWebServiceClient {
 
     public RestWebServiceClient(String baseUri, String proxy_uri, String proxy_username, String proxy_password) {
         this.baseUri = baseUri;
-        client = ClientBuilder.newClient();
+        ClientConfig config = new ClientConfig();
+
 //        client.property(ClientProperties.CONNECT_TIMEOUT, 1000);
 //        client.property(ClientProperties.READ_TIMEOUT, 1000);
 
-        if(!proxy_uri.isEmpty() && ! proxy_username.isEmpty() && !proxy_password.isEmpty()){
-            client.property(ClientProperties.PROXY_URI, proxy_uri);
-            client.property(ClientProperties.PROXY_USERNAME, proxy_username);
-            client.property(ClientProperties.PROXY_PASSWORD, proxy_password);
+        if(proxy_uri != null && proxy_username != null && proxy_password != null) {
+            config.property(ClientProperties.PROXY_URI, proxy_uri);
+            config.property(ClientProperties.PROXY_USERNAME, proxy_username);
+            config.property(ClientProperties.PROXY_PASSWORD, proxy_password);
         }
-
+        client = ClientBuilder.newClient(config);
         target = client.target(baseUri);
     }
 
@@ -49,9 +51,9 @@ public class RestWebServiceClient {
         Response response = target.request(MediaType.TEXT_PLAIN)
                 .get(Response.class);
 
-        System.out.println("Status de la requet :" + response.getStatus());
+        System.out.println("Status de la requete :" + response.getStatus());
 
-        String message = null;
+        String message = "";
         if (response.getStatus() == 200) {
             message = response.readEntity(new GenericType<String>() {
             });
@@ -103,7 +105,7 @@ public class RestWebServiceClient {
             System.out.println("post request using Json is Success");
             return message;
         }
-        return null;
+        return "Post request using Json is Error";
     }
 
     public void putRequest() {
@@ -123,7 +125,7 @@ public class RestWebServiceClient {
 
     public static void main(String args[]) throws Exception {
         try {
-            RestWebServiceClient restWebServiceClient = new RestWebServiceClient("http://localhost:8080/rest/service");
+            RestWebServiceClient restWebServiceClient = new RestWebServiceClient("http://richemont.tanaguru.com/rest/service", "", "", "");
             restWebServiceClient.getTestConnection();
             //  jerseyClient.postRequest();
             restWebServiceClient.postRequestUsingGson("http://longdesc.fr/");
