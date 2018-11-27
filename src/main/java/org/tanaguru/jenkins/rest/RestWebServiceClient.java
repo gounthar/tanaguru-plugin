@@ -9,10 +9,14 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.google.gson.Gson;
+import org.glassfish.jersey.apache.connector.ApacheConnectorProvider;
 import org.glassfish.jersey.client.ClientConfig;
 import org.glassfish.jersey.client.ClientProperties;
+import org.glassfish.jersey.client.RequestEntityProcessing;
 import org.tanaguru.model.AuditModel;
 import org.tanaguru.util.UtilityCall;
+
+
 
 /**
  *
@@ -28,15 +32,20 @@ public class RestWebServiceClient {
         this.baseUri = baseUri;
         ClientConfig config = new ClientConfig();
 
-//        client.property(ClientProperties.CONNECT_TIMEOUT, 1000);
-//        client.property(ClientProperties.READ_TIMEOUT, 1000);
+        if(proxy_uri != null && proxy_username != null && proxy_password != null
+                && !proxy_uri.isEmpty() && !proxy_username.isEmpty() && !proxy_password.isEmpty()) {
+            config.connectorProvider(new ApacheConnectorProvider());
 
-        if(proxy_uri != null && proxy_username != null && proxy_password != null) {
             config.property(ClientProperties.PROXY_URI, proxy_uri);
             config.property(ClientProperties.PROXY_USERNAME, proxy_username);
             config.property(ClientProperties.PROXY_PASSWORD, proxy_password);
+            config.property(ClientProperties.REQUEST_ENTITY_PROCESSING, RequestEntityProcessing.BUFFERED);
         }
         client = ClientBuilder.newClient(config);
+
+        //client.property(ClientProperties.CONNECT_TIMEOUT, 1000);
+        //client.property(ClientProperties.READ_TIMEOUT, 1000);
+
         target = client.target(baseUri);
     }
 
@@ -125,13 +134,13 @@ public class RestWebServiceClient {
 
     public static void main(String args[]) throws Exception {
         try {
-            RestWebServiceClient restWebServiceClient = new RestWebServiceClient("http://richemont.tanaguru.com/rest/service", "", "", "");
+            RestWebServiceClient restWebServiceClient = new RestWebServiceClient("http://localhost:8080/rest/service", "", "", "");
             restWebServiceClient.getTestConnection();
             //  jerseyClient.postRequest();
             restWebServiceClient.postRequestUsingGson("http://longdesc.fr/");
 //                     jerseyClient.putRequest();
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 
