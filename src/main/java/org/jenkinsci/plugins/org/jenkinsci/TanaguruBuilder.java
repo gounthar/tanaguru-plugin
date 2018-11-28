@@ -48,7 +48,6 @@ public class TanaguruBuilder extends Builder implements SimpleBuildStep {
     private String proxy_uri = "";
     private String proxy_username = "";
     private String proxy_password = "";
-    private int proxy_port = 0;
 
     // Fields in config.jelly must match the parameter names in the "DataBoundConstructor"
     @DataBoundConstructor
