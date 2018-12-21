@@ -133,7 +133,7 @@ public class RestWebServiceClient {
 
     public static void main(String args[]) throws Exception {
         try {
-            RestWebServiceClient restWebServiceClient = new RestWebServiceClient("http://richemont.tanaguru.com/rest/service", "", "", "");
+            RestWebServiceClient restWebServiceClient = new RestWebServiceClient("http://localhost:8080/rest/service", "", "", "");
             restWebServiceClient.getTestConnection();
 
             String scenario = "{\n" +
