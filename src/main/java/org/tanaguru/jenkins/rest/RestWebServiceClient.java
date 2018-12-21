@@ -17,7 +17,6 @@ import org.tanaguru.model.AuditModel;
 import org.tanaguru.util.UtilityCall;
 
 
-
 /**
  *
  * @author tanaguru
@@ -134,11 +133,63 @@ public class RestWebServiceClient {
 
     public static void main(String args[]) throws Exception {
         try {
-            RestWebServiceClient restWebServiceClient = new RestWebServiceClient("http://localhost:8080/rest/service", "", "", "");
+            RestWebServiceClient restWebServiceClient = new RestWebServiceClient("http://richemont.tanaguru.com/rest/service", "", "", "");
             restWebServiceClient.getTestConnection();
-            //  jerseyClient.postRequest();
-            restWebServiceClient.postRequestUsingGson("http://longdesc.fr/");
-//                     jerseyClient.putRequest();
+
+            String scenario = "{\n" +
+                    "  \"seleniumVersion\": \"2\",\n" +
+                    "  \"formatVersion\": 1,\n" +
+                    "  \"steps\": [\n" +
+                    "    {\n" +
+                    "      \"type\": \"get\",\n" +
+                    "      \"url\": \"http://site.tgqa.org/\"\n" +
+                    "    },\n" +
+                    "    {\n" +
+                    "      \"type\": \"clickElement\",\n" +
+                    "      \"locator\": {\n" +
+                    "        \"type\": \"link text\",\n" +
+                    "        \"value\": \"This page won't be crawled due to the robots.txt restrictrion\"\n" +
+                    "      }\n" +
+                    "    },\n" +
+                    "    {\n" +
+                    "      \"type\": \"goBack\"\n" +
+                    "    },\n" +
+                    "    {\n" +
+                    "      \"type\": \"clickElement\",\n" +
+                    "      \"locator\": {\n" +
+                    "        \"type\": \"link text\",\n" +
+                    "        \"value\": \"This page will be crawled\"\n" +
+                    "      }\n" +
+                    "    },\n" +
+                    "    {\n" +
+                    "      \"type\": \"clickElement\",\n" +
+                    "      \"locator\": {\n" +
+                    "        \"type\": \"link text\",\n" +
+                    "        \"value\": \"This page won't be crawled due to the robots.txt restrictrion\"\n" +
+                    "      }\n" +
+                    "    },\n" +
+                    "    {\n" +
+                    "      \"type\": \"goBack\"\n" +
+                    "    },\n" +
+                    "    {\n" +
+                    "      \"type\": \"clickElement\",\n" +
+                    "      \"locator\": {\n" +
+                    "        \"type\": \"link text\",\n" +
+                    "        \"value\": \"This page will be crawled\"\n" +
+                    "      }\n" +
+                    "    },\n" +
+                    "    {\n" +
+                    "      \"type\": \"clickElement\",\n" +
+                    "      \"locator\": {\n" +
+                    "        \"type\": \"link text\",\n" +
+                    "        \"value\": \"This page won't be crawled due to the robots.txt restrictrion\"\n" +
+                    "      }\n" +
+                    "    }\n" +
+                    "  ]\n" +
+                    "}";
+
+            restWebServiceClient.postRequestUsingGson(scenario);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
